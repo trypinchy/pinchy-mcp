@@ -7,4 +7,4 @@ sudo -H -u pinchy-mcp pnpm install --frozen-lockfile
 sudo -H -u pinchy-mcp pnpm build
 pm2 startOrReload ecosystem.config.cjs --only pinchy-mcp
 pm2 save
-curl -fsS http://127.0.0.1:4020/healthz
+curl -fsS --retry 5 --retry-connrefused --retry-delay 1 http://127.0.0.1:4020/healthz
