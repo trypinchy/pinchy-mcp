@@ -1,19 +1,41 @@
 {
   "name": "pinchy-mcp",
   "version": "0.1.0",
-  "private": true,
   "description": "MCP server that finds working coupon codes for any online store.",
   "license": "MIT",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "coupons",
+    "promo-codes",
+    "shopping",
+    "ai-agents"
+  ],
+  "homepage": "https://github.com/trypinchy/pinchy-mcp#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trypinchy/pinchy-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/trypinchy/pinchy-mcp/issues"
+  },
   "type": "module",
   "engines": {
-    "node": ">=22"
+    "node": ">=20"
   },
+  "bin": {
+    "pinchy-mcp": "dist/stdio.js"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "tsx watch src/main.ts",
     "build": "tsc -p tsconfig.build.json",
     "start": "node dist/main.js",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "prepublishOnly": "pnpm typecheck && pnpm test && rm -rf dist && pnpm build"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.30.0",

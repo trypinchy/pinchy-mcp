@@ -19,6 +19,12 @@ describe('lookupCoupons', () => {
     expect((init?.headers as Record<string, string>)['x-forwarded-for']).toBe('203.0.113.9');
   });
 
+  it('sends no caller address when it runs on the caller\'s own machine', async () => {
+    const port = portWith(json({ success: true, store: null }));
+    await lookupCoupons(port, 'shop.com');
+    expect(vi.mocked(port.fetch).mock.calls[0]![1]?.headers).toEqual({});
+  });
+
   it('returns the store when codes exist', async () => {
     const store = { domain: 'shop.com', name: 'Shop', coupons: [{ code: 'SAVE10', successCount: 4 }] };
     const result = await lookupCoupons(portWith(json({ success: true, store })), 'shop.com', 'ip');

@@ -34,12 +34,12 @@ export interface LookupPort {
   apiUrl: string;
 }
 
-export async function lookupCoupons(port: LookupPort, domain: string, clientIp: string): Promise<LookupResult> {
+export async function lookupCoupons(port: LookupPort, domain: string, clientIp?: string): Promise<LookupResult> {
   const url = `${port.apiUrl}/v1/ext/coupons?domain=${encodeURIComponent(domain)}`;
   try {
-    // The API limits per caller; without this every agent would share this process's single bucket.
+    // The API limits per caller; without this every agent behind the hosted server would share one bucket.
     const response = await port.fetch(url, {
-      headers: { 'x-forwarded-for': clientIp },
+      headers: clientIp ? { 'x-forwarded-for': clientIp } : {},
       signal: AbortSignal.timeout(15_000),
     });
     if (response.status === 429) {

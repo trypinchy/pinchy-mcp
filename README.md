@@ -11,6 +11,12 @@ MCP server that finds coupon codes for any online store. Remote endpoint: `https
 
 Claude Code: `claude mcp add --transport http pinchy https://mcp.trypinchy.com/mcp`
 
+Clients that only speak stdio can run the npm package instead:
+
+```json
+{ "mcpServers": { "pinchy": { "command": "npx", "args": ["-y", "pinchy-mcp"] } } }
+```
+
 ## Tool
 
 `find_coupons({ store, limit? })` — `store` is a domain or any URL on the store; `limit` defaults to 10 (max 50).
