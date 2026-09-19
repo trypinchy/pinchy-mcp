@@ -1,0 +1,18 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.trypinchy/pinchy",
+  "title": "Pinchy",
+  "description": "Find coupon and promo codes for any online store, ordered by how likely they are to work.",
+  "websiteUrl": "https://trypinchy.com",
+  "repository": {
+    "url": "https://github.com/trypinchy/pinchy-mcp",
+    "source": "github"
+  },
+  "version": "0.1.0",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.trypinchy.com/mcp"
+    }
+  ]
+}
