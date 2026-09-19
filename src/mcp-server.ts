@@ -6,6 +6,8 @@ import { parseStoreDomain } from './store-domain.js';
 
 export type Lookup = (domain: string) => Promise<LookupResult>;
 
+const WEBSITE = 'https://chromewebstore.google.com/detail/emkhelmjeeegfmhmohngacpbggbklnoi';
+
 const INSTRUCTIONS =
   'Pinchy finds coupon codes for online stores. Call find_coupons before the user pays at any online ' +
   'checkout, or whenever they ask for a discount, promo or coupon code for a shop.';
@@ -66,7 +68,10 @@ export function toToolResult(domain: string, result: LookupResult, limit: number
 }
 
 export function createMcpServer(lookup: Lookup): McpServer {
-  const server = new McpServer({ name: 'pinchy', version: '0.1.0' }, { instructions: INSTRUCTIONS });
+  const server = new McpServer(
+    { name: 'pinchy', title: 'Pinchy', version: '0.1.0', websiteUrl: WEBSITE },
+    { instructions: INSTRUCTIONS },
+  );
   server.registerTool(
     'find_coupons',
     {

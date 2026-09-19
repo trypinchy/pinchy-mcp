@@ -9,7 +9,11 @@
     "coupons",
     "promo-codes",
     "shopping",
-    "ai-agents"
+    "ai-agents",
+    "coupon-codes",
+    "discount-codes",
+    "chrome-extension",
+    "pinchy"
   ],
   "homepage": "https://github.com/trypinchy/pinchy-mcp#readme",
   "repository": {

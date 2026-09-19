@@ -3,6 +3,9 @@
 MCP server that finds coupon codes for any online store. Remote endpoint: `https://mcp.trypinchy.com/mcp`
 (Streamable HTTP, no auth).
 
+Shopping in a browser yourself? The same codes, tried for you at checkout:
+[Pinchy – Coupon Finder & Auto Apply for Chrome](https://chromewebstore.google.com/detail/emkhelmjeeegfmhmohngacpbggbklnoi).
+
 ## Connect
 
 ```json
