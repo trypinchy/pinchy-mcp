@@ -1,6 +1,7 @@
 {
   "name": "pinchy-mcp",
-  "version": "0.1.0",
+  "version": "0.1.1",
+  "mcpName": "com.trypinchy/pinchy",
   "description": "MCP server that finds working coupon codes for any online store.",
   "license": "MIT",
   "keywords": [

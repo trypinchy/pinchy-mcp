@@ -8,11 +8,21 @@
     "url": "https://github.com/trypinchy/pinchy-mcp",
     "source": "github"
   },
-  "version": "0.1.0",
+  "version": "0.1.1",
   "remotes": [
     {
       "type": "streamable-http",
       "url": "https://mcp.trypinchy.com/mcp"
+    }
+  ],
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "pinchy-mcp",
+      "version": "0.1.1",
+      "transport": {
+        "type": "stdio"
+      }
     }
   ]
 }
