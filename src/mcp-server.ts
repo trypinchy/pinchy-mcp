@@ -18,7 +18,7 @@ const INSTRUCTIONS =
 const DESCRIPTION =
   'Find coupon / promo / discount codes for an online store. Pass the store domain or any URL from the ' +
   'store (product, cart or checkout page). Returns codes ordered by how likely they are to work: try them ' +
-  'at checkout from the top, keep the one that lowers the total the most. Codes are community-sourced and ' +
+  'at checkout from the top, keep the one that lowers the total the most. Codes are aggregated from public sources and ' +
   'not guaranteed; an empty list means none are known for that store.';
 
 const couponOut = z.object({
