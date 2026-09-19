@@ -3,3 +3,8 @@ dist
 .env
 .env.*
 !.env.example
+# pnpm and npm keep their stores under the service user's home, which is this directory on the host
+.local
+.cache
+.npm
+.config
