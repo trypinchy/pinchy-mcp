@@ -105,4 +105,15 @@ describe('MCP over HTTP', () => {
     expect((await fetch(new URL('/healthz', url))).status).toBe(200);
     expect((await fetch(url)).status).toBe(405);
   });
+
+  it('serves the Glama ownership document', async () => {
+    const { url } = await start(found);
+    const response = await fetch(new URL('/.well-known/glama.json', url));
+    expect(response.status).toBe(200);
+    expect(response.headers.get('content-type')).toContain('application/json');
+    expect(await response.json()).toEqual({
+      $schema: 'https://glama.ai/mcp/schemas/connector.json',
+      claim: 'glama_claim_OfFvXFi1S2ogIVmwRh25632EPPqKIBmr',
+    });
+  });
 });

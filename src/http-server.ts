@@ -1,5 +1,6 @@
 import { createServer, type IncomingMessage, type Server, type ServerResponse } from 'node:http';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
+import { GLAMA_OWNERSHIP_BODY } from './glama-ownership.js';
 import { createMcpServer, type Lookup } from './mcp-server.js';
 import type { RateLimit } from './rate-limit.js';
 
@@ -58,10 +59,23 @@ async function handleMcp(deps: HttpDeps, req: IncomingMessage, res: ServerRespon
   await transport.handleRequest(req, res, body);
 }
 
+function sendGlamaOwnership(req: IncomingMessage, res: ServerResponse): void {
+  if (req.method !== 'GET' && req.method !== 'HEAD') {
+    res.writeHead(405, { allow: 'GET, HEAD' }).end();
+    return;
+  }
+  res.writeHead(200, {
+    'content-type': 'application/json; charset=utf-8',
+    'cache-control': 'no-store',
+  });
+  res.end(req.method === 'HEAD' ? undefined : GLAMA_OWNERSHIP_BODY);
+}
+
 export function createHttpServer(deps: HttpDeps): Server {
   return createServer((req, res) => {
     const path = new URL(req.url ?? '/', 'http://localhost').pathname;
     if (path === '/healthz') return sendJson(res, 200, { ok: true });
+    if (path === '/.well-known/glama.json') return sendGlamaOwnership(req, res);
     if (path !== '/mcp') return sendJson(res, 404, { error: 'Not found. The MCP endpoint is POST /mcp.' });
     handleMcp(deps, req, res).catch(() => {
       if (!res.headersSent) sendJson(res, 500, rpcError('Internal server error'));
